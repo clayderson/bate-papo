@@ -1,0 +1,17 @@
+#runtime
+pids
+*.pid
+*.seed
+*.pid.lock
+
+#system files
+.DS_Store
+thumbs.db
+desktop.ini
+*.bak
+
+#folders
+vendor/*
+
+#env files
+src/.htaccess

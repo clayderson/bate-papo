@@ -1,0 +1,55 @@
+{% extends 'layouts/geral.twig' %}
+
+{% block title %}Bate Papo | By Clayderson Ferreira{% endblock %}
+
+{% block css %}
+	<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Assistant:300" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-11 text-center">
+				<div class="row justify-content-center">
+					<div class="col col-sm-6 title-container">
+						<h1>{{ title }}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-11 text-center">
+				<div class="row justify-content-center">
+					<div class="col col-sm-6 viewport-container">
+						<div class="messages">
+							<div class="he" title="Enviada em 11 de jan às 03h04"><p>Oiii</p></div>
+							<div class="you" title="Enviada em 11 de jan às 03h29"><p>Olá, tudo bem?</p></div>
+							<div class="you" title="Enviada em 11 de jan às 03h30"><p>Desculpa demorar pra responder. Estava com uns probleminhas aqui kk</p></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-11 text-center">
+				<div class="row justify-content-center">
+					<div class="col col-sm-6 input-container">
+						<div class="form-row align-items-center">
+							<div class="col-10">
+								<input type="text" class="form-control" id="inputMessage" placeholder="Digite uma mensagem" autocomplete="off">
+							</div>
+							<div class="col-2">
+								<button class="btn btn-light btn-submit"><i class="fas fa-paper-plane"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-11 text-center">
+				<footer>
+					<p><i class="fas fa-heart"></i> By <a href="//clayderson.com.br" title="Ir para o site do desenvolvedor" target="_blank">Clayderson Ferreira</a></p>
+				</footer>
+			</div>
+		</div>
+	</div>
+{% endblock %}

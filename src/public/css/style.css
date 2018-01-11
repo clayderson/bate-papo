@@ -1,0 +1,94 @@
+* {
+	font-family: 'Assistant', sans-serif;
+}
+
+body {
+	background-color: #a588be;
+}
+
+.title-container {
+	margin-top: 5rem;
+	padding: .6rem;
+	background-color: #7f5c9d;
+	color: #fbfbfb;
+	border-radius: 5px 5px 0 0;
+}
+
+.title-container h1 {
+	font-family: 'Caveat Brush', cursive;
+	font-size: 3rem;
+}
+
+.viewport-container {
+	position: relative;
+	padding: 1rem 1.6rem;
+	min-height: 330px;
+	max-height: 330px;
+	background-color: #fbfbfb;
+	overflow: auto;
+}
+
+.viewport-container .messages {
+	position: absolute;
+	bottom: 10px;
+	padding-top: 1.8rem;
+	width: calc(100% - 3.2rem);
+	max-height: 330px;
+}
+
+.viewport-container .messages .he, .viewport-container .messages .you {
+	margin: -.2rem 0;
+}
+
+.viewport-container .messages .he p, .viewport-container .messages .you p {
+	padding: .5rem 1rem;
+	display: inline-block;
+	background-color: #a588be;
+	color: #fbfbfb;
+	border-radius: 3px;
+	font-weight: lighter;
+	font-size: 1rem;
+}
+
+.viewport-container .messages .he {
+	text-align: left;
+}
+
+.viewport-container .messages .you {
+	text-align: right;
+}
+
+.input-container {
+	padding: 1rem 1.6rem;
+	background-color: #e8dcf3;
+}
+
+.input-container input, .input-container input:active, .input-container input:focus {
+	padding: .8rem .2rem;
+	background-color: #e8dcf3;
+	border: none;
+	box-shadow: none;
+	outline: none;
+	font-weight: lighter;
+}
+
+.input-container .btn-submit {
+	padding-left: .5rem;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	font-size: 1.2rem;
+}
+
+.input-container .btn-submit:hover {
+	background-color: #7f5c9d;
+	color: #fbfbfb;
+}
+
+footer, footer a, footer a:hover, footer a:active, footer a:focus {
+	margin-top: 3rem;
+	color: #e8dcf3;
+	text-decoration: none;
+	font-weight: lighter;
+	font-size: 1rem;
+}

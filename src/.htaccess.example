@@ -1,0 +1,4 @@
+SetEnv DEBUG "OFF"
+
+SetEnv LOGGER "OFF"
+SetEnv LOGGER_FILE "/tmp/batepapo.json"

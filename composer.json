@@ -1,0 +1,13 @@
+{
+	"require": {
+		"slim/slim": "^3.9",
+		"slim/twig-view": "^2.3"
+	},
+
+	"autoload": {
+		"psr-4": {
+			"app\\": "src/app/",
+			"": "src/classes/"
+		}
+	}
+}
