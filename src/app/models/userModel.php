@@ -82,7 +82,7 @@
 			$stmt->execute();
 
 			if ($stmt->rowCount()) {
-				return true;
+				return db::instance()->lastInsertId();
 			}
 
 			return false;
@@ -97,11 +97,7 @@
 			$stmt->bindValue(':id', $id);
 			$stmt->execute();
 
-			if ($stmt->rowCount()) {
-				return true;
-			}
-
-			return false;
+			return $stmt->rowCount();
 		}
 
 		public static function updateById($id, $nickname, $color)
@@ -115,10 +111,6 @@
 			$stmt->bindValue(':id', $id);
 			$stmt->execute();
 
-			if ($stmt->rowCount()) {
-				return true;
-			}
-
-			return false;
+			return $stmt->rowCount();
 		}
 	}
