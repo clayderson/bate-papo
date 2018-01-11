@@ -7,9 +7,9 @@
 		public function __invoke($request, $response, $args)
 		{
 			if ($request->isGet()) {
-				return $this->view->render($response->withStatus(200), '/home.twig', [
-					'title' => 'Bate papo'
-				]);
+				return $response->withStatus(302)->withHeader('Location', $this->router->pathFor('chat', [
+					'secret' => bin2hex(random_bytes(5))
+				]));
 			}
 
 			return $response;
