@@ -24,13 +24,20 @@
 
 	$container['notFoundHandler'] = function($container) {
 		return function($request, $response) {
-			logger::add(logger::WARNING, "Página não encontrada: {$request->getUri()->getPath()}");
+			logger::add(
+				logger::WARNING,
+				"Página não encontrada: {$request->getUri()->getPath()}"
+			);
 
-			if ($request->getUri()->getPath() === '/' || empty($request->getUri()->getPath())) {
-				return $response->withJson(['errorMessage' => 'Not found'], 404);
-			} else {
-				return $response->withStatus(301)->withHeader('Location', '/?redirectReason=404');
+			$specialPaths = ['/', '/favicon.ico'];
+
+			if (in_array($request->getUri()->getPath(), $specialPaths)) {
+				return $response->withJson([
+					'errorMessage' => 'Not found'
+				], 404);
 			}
+
+			return $response->withStatus(301)->withHeader('Location', '/?redirectReason=404');
 		};
 	};
 
@@ -45,6 +52,7 @@
 			if (is_object($e)) {
 				$errorMessage = "{$e->getMessage()} {$e->getFile()} {$e->getLine()}";
 				logger::add(logger::ERROR, $errorMessage);
+
 				if (!$container->get('settings')['displayErrorDetails']) {
 					unset($errorMessage);
 				}
