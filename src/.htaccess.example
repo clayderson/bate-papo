@@ -2,3 +2,9 @@ SetEnv DEBUG "OFF"
 
 SetEnv LOGGER "OFF"
 SetEnv LOGGER_FILE "/tmp/batepapo.json"
+
+SetEnv MYSQL_HOSTNAME "127.0.0.1"
+SetEnv MYSQL_USERNAME "root"
+SetEnv MYSQL_PASSWORD ""
+SetEnv MYSQL_DATABASE "test"
+SetEnv MYSQL_PORT "3306"

@@ -20,6 +20,8 @@
 		logger::setFile(__LOGGER_FILE);
 	}
 
+	db::credentials(__MYSQL_HOST, __MYSQL_USER, __MYSQL_PASS, __MYSQL_DBNAME, __MYSQL_PORT);
+
 	$container['notFoundHandler'] = function($container) {
 		return function($request, $response) {
 			logger::add(logger::WARNING, "Página não encontrada: {$request->getUri()->getPath()}");

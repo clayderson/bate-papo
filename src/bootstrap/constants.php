@@ -13,3 +13,9 @@
 	define('__DIR_CLASSES', __DIR_SRC . '/classes');
 	define('__DIR_PUBLIC', __DIR_SRC . '/public');
 	define('__DIR_VIEWS', __DIR_APP . '/views');
+
+	define('__MYSQL_HOST', getenv('MYSQL_HOSTNAME'));
+	define('__MYSQL_USER', getenv('MYSQL_USERNAME'));
+	define('__MYSQL_PASS', getenv('MYSQL_PASSWORD'));
+	define('__MYSQL_DBNAME', getenv('MYSQL_DATABASE'));
+	define('__MYSQL_PORT', getenv('MYSQL_PORT'));
