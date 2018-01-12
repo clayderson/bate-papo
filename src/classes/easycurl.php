@@ -18,8 +18,7 @@
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 
 			if ($method === self::POST || $method === self::PUT) {
-				$jsonData = json_encode(
-					$post,
+				$jsonData = json_encode($post,
 					JSON_NUMERIC_CHECK | JSON_PRESERVE_ZERO_FRACTION | JSON_FORCE_OBJECT
 				);
 

@@ -20,9 +20,7 @@
 		private static function save($filedata)
 		{
 			return file_put_contents(self::$filename, json_encode($filedata,
-				JSON_PRETTY_PRINT +
-				JSON_BIGINT_AS_STRING +
-				JSON_PRESERVE_ZERO_FRACTION
+				JSON_PRETTY_PRINT | JSON_BIGINT_AS_STRING | JSON_PRESERVE_ZERO_FRACTION
 			));
 		}
 
