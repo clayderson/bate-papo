@@ -52,14 +52,13 @@
 			return false;
 		}
 
-		public static function save($roomId, $nickname, $color, $token)
+		public static function save($nickname, $color, $token)
 		{
 			$stmt = db::instance()->prepare(
-				'INSERT INTO `user` (`roomId`, `nickname`, `color`, `token`)
+				'INSERT INTO `user` (`nickname`, `color`, `token`)
 				VALUES (:roomId, :nickname, :color, :token)'
 			);
 
-			$stmt->bindValue(':roomId', $roomId);
 			$stmt->bindValue(':nickname', $nickname);
 			$stmt->bindValue(':color', $color);
 			$stmt->bindValue(':token', $token);
