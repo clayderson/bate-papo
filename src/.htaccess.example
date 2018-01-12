@@ -8,3 +8,5 @@ SetEnv MYSQL_USERNAME "root"
 SetEnv MYSQL_PASSWORD ""
 SetEnv MYSQL_DATABASE "test"
 SetEnv MYSQL_PORT "3306"
+
+SetEnv API_URL "https://batepapo.clayderson.com.br/api"

@@ -19,3 +19,5 @@
 	define('__MYSQL_PASS', getenv('MYSQL_PASSWORD'));
 	define('__MYSQL_DBNAME', getenv('MYSQL_DATABASE'));
 	define('__MYSQL_PORT', getenv('MYSQL_PORT'));
+
+	define('__API_URL', getenv('API_URL'));
