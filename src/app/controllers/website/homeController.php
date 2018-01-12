@@ -7,9 +7,10 @@
 		public function __invoke($request, $response, $args)
 		{
 			if ($request->isGet()) {
-				return $response->withStatus(302)->withHeader('Location', $this->router->pathFor('chat', [
-					'secret' => bin2hex(random_bytes(5))
-				]));
+				return $response->withStatus(302)->withHeader(
+					'Location',
+					$this->router->pathFor('chat', ['roomCode' => bin2hex(random_bytes(5))]
+				));
 			}
 
 			return $response;

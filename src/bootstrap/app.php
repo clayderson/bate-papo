@@ -93,5 +93,6 @@
 	};
 
 	require __DIR_BOOTSTRAP . '/routes/website.php';
+	require __DIR_BOOTSTRAP . '/routes/api.php';
 
 	$app->run();

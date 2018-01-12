@@ -56,7 +56,7 @@
 		{
 			$stmt = db::instance()->prepare(
 				'INSERT INTO `user` (`nickname`, `color`, `token`)
-				VALUES (:roomId, :nickname, :color, :token)'
+				VALUES (:nickname, :color, :token)'
 			);
 
 			$stmt->bindValue(':nickname', $nickname);
