@@ -20,22 +20,6 @@
 			return false;
 		}
 
-		public static function findAllByRoomId($roomId)
-		{
-			$stmt = db::instance()->prepare(
-				'SELECT * FROM `user` WHERE `roomId` = :roomId'
-			);
-
-			$stmt->bindValue(':roomId', $roomId);
-			$stmt->execute();
-
-			if ($stmt->rowCount()) {
-				return self::typeSanitize($stmt->fetchAll());
-			}
-
-			return false;
-		}
-
 		public static function findById($id)
 		{
 			$stmt = db::instance()->prepare(

@@ -53,13 +53,14 @@
 			return false;
 		}
 
-		public static function findAllByRoomIdAndLimitAndOffset($roomId, $limit, $offset)
+		public static function findAllByRoomIdAndMinutesAgoAndLimitAndOffset($roomId, $minutesAgo, $limit, $offset)
 		{
 			$stmt = db::instance()->prepare(
-				'SELECT * FROM `message` WHERE `roomId` = :roomId LIMIT :limit OFFSET :offset'
+				'SELECT * FROM `message` WHERE `roomId` = :roomId AND `createdAt` >= :createdAt LIMIT :limit OFFSET :offset'
 			);
 
 			$stmt->bindValue(':roomId', $roomId);
+			$stmt->bindValue(':createdAt', (time() - (60 * $minutesAgo)));
 			$stmt->bindValue(':limit', $limit);
 			$stmt->bindValue(':offset', $offset);
 			$stmt->execute();
