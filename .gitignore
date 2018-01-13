@@ -2,7 +2,6 @@
 *.bak
 src/.htaccess
 
-
 # Created by https://www.gitignore.io/api/linux,macos,windows,composer,sublimetext,visualstudiocode
 
 ### Composer ###
