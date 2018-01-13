@@ -21,6 +21,11 @@
 	$container = $app->getContainer();
 
 	if (stripos($container['request']->getUri()->getPath(), '/api') === 0) {
+		$app->add(new \CorsSlim\CorsSlim([
+			'origin' => ['*'],
+			'allowMethods' => ['GET', 'POST', 'PUT']
+		]));
+
 		if (__MYSQL_HOST) {
 			db::credentials(
 				__MYSQL_HOST,
