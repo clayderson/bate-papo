@@ -5,6 +5,9 @@
 	define('__LOGGER', getenv('LOGGER') === 'ON' ? true : false);
 	define('__LOGGER_FILE', getenv('LOGGER_FILE'));
 
+	define('__GOOGLE_ANALYTICS', getenv('GOOGLE_ANALYTICS') === 'ON' ? true : false);
+	define('__GOOGLE_ANALYTICS_ID', getenv('GOOGLE_ANALYTICS_ID'));
+
 	define('__DIR_ROOT', realpath(__DIR__ . '/../..'));
 	define('__DIR_VENDOR', __DIR_ROOT . '/vendor');
 	define('__DIR_SRC', __DIR_ROOT . '/src');

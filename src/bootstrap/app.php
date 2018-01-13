@@ -138,6 +138,11 @@
 				'commit' => substr(shell_exec('git rev-parse HEAD'), 0, 7),
 			]);
 
+			$view->getEnvironment()->addGlobal('googleAnalytics', [
+				'active' => __GOOGLE_ANALYTICS,
+				'id' => __GOOGLE_ANALYTICS_ID,
+			]);
+
 			return $view;
 		};
 	}

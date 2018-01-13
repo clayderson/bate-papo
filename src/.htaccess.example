@@ -3,10 +3,13 @@ SetEnv DEBUG "OFF"
 SetEnv LOGGER "OFF"
 SetEnv LOGGER_FILE "/tmp/batepapo.json"
 
+SetEnv GOOGLE_ANALYTICS "OFF"
+SetEnv GOOGLE_ANALYTICS_ID "UA-XXXXX-Y"
+
 SetEnv MYSQL_HOSTNAME "127.0.0.1"
 SetEnv MYSQL_USERNAME "root"
 SetEnv MYSQL_PASSWORD ""
 SetEnv MYSQL_DATABASE "test"
 SetEnv MYSQL_PORT "3306"
 
-SetEnv API_URL "https://batepapo.clayderson.com.br/api"
+SetEnv API_URL "http://localhost/api"
