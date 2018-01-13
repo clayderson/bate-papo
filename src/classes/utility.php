@@ -16,7 +16,7 @@
             return bin2hex(random_bytes(5));
         }
 
-        private static function getRandomNickname($maxChars = null)
+        public static function getRandomNickname($maxChars = null)
 		{
 			$cuteAnimals = [
 				'Feneco', 'Társio-das-Filipinas', 'Panda', 'Foca da Groelândia',
