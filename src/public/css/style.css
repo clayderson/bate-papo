@@ -2,6 +2,10 @@
 	font-family: 'Assistant', sans-serif;
 }
 
+strong {
+	font-weight: 600 !important;
+}
+
 body {
 	background-color: #a588be;
 }
@@ -46,7 +50,7 @@ body {
 	top: 120px;
 }
 
-.viewport-container .messages {
+.viewport-container .messages-container {
 	display: none;
 	position: absolute;
 	bottom: 10px;
@@ -55,13 +59,15 @@ body {
 	max-height: 330px;
 }
 
-.viewport-container .messages .he,
-.viewport-container .messages .you {
+.viewport-container .messages-container .he,
+.viewport-container .messages-container .you,
+.viewport-container .messages-container .system {
 	margin: -.2rem 0;
 }
 
-.viewport-container .messages .he p,
-.viewport-container .messages .you p {
+.viewport-container .messages-container .he p,
+.viewport-container .messages-container .you p,
+.viewport-container .messages-container .system p {
 	padding: .5rem 1rem;
 	display: inline-block;
 	background-color: #a588be;
@@ -71,11 +77,18 @@ body {
 	font-size: 1rem;
 }
 
-.viewport-container .messages .he {
+.viewport-container .messages-container .system p {
+	display: block;
+	background-color: #fed859;
+	color: #696969;
+	font-size: .9rem;
+}
+
+.viewport-container .messages-container .he {
 	text-align: left;
 }
 
-.viewport-container .messages .you {
+.viewport-container .messages-container .you {
 	text-align: right;
 }
 
