@@ -18,15 +18,15 @@
 				], 400);
 			}
 
-			$data = messagesTable::findAllByRoomIdAndMinutesAgo($roomId, 15)[0] ?? null;
+			$data = messagesTable::findAllByRoomIdAndMinutesAgo($roomId, 15) ?? null;
 
 			if (!empty($data)) {
-				return $response->withJson([
-					'id' => $data['id'],
-					'roomId' => $data['roomId'],
-					'userId' => $data['userId'],
-					'message' => htmlspecialchars($data['message'])
-				], 200);
+				foreach ($data as $message) {
+					$messages[$message['id']] = $message;
+					unset($messages[$message['id']]['id']);
+				}
+
+				return $response->withJson($messages, 200);
 			}
 
 			return $response->withJson([], 200);
@@ -56,15 +56,15 @@
 				], 400);
 			}
 
-			$data = messagesTable::findAllByRoomIdAndMinutesAgoAndLimitAndOffset($roomId, 15, $limit, $offset)[0] ?? null;
+			$data = messagesTable::findAllByRoomIdAndMinutesAgoAndLimitAndOffset($roomId, 15, $limit, $offset) ?? null;
 
 			if (!empty($data)) {
-				return $response->withJson([
-					'id' => $data['id'],
-					'roomId' => $data['roomId'],
-					'userId' => $data['userId'],
-					'message' => htmlspecialchars($data['message'])
-				], 200);
+				foreach ($data as $message) {
+					$messages[$message['id']] = $message;
+					unset($messages[$message['id']]['id']);
+				}
+
+				return $response->withJson($messages, 200);
 			}
 
 			return $response->withJson([], 200);
