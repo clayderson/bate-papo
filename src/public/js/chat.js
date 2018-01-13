@@ -1,16 +1,56 @@
 $(document).ready(function() {
 	$.cookie('user') === undefined ? userRegister() : userLogin();
 
+	btnSubmit.click(function() {
+		const messsage = inputMessage.val().replace(/^\s+/g, '');
+		if (messsage.length) {
+			inputMessage.val('');
+			sendMessage(messsage);
+		}
+	});
+
+	inputMessage.on('keyup', function(event) {
+		if (event.keyCode == 13) {
+			btnSubmit.click();
+		}
+	});
+
 	function fatalError(errorMessage) {
 		$.removeCookie('user');
 		window.location.reload(true);
+	}
+
+	function sendMessage(message) {
+		const formData = {
+			roomId: runtime.room.id,
+			userToken: runtime.user.token,
+			message: message
+		};
+
+		console.log(formData);
+
+		$.ajax({
+			url: `${runtime.api.url}/v1/messages`,
+			method: 'POST',
+			dataType: 'json',
+			data: formData,
+			success: function(response) {},
+			error: function(jqXHR) {
+				if (jqXHR.status !== 400) {
+					setTimeout(function() {
+						sendMessage(message);
+					}, 2000);
+					alertContainer.show(300);
+				}
+			}
+		});
 	}
 
 	function getMessages() {
 		$.ajax({
 			url: `${runtime.api.url}/v1/messages/${runtime.room.id}`,
 			contentType: 'application/json; charset=UTF-8',
-			type: 'GET',
+			method: 'GET',
 			dataType: 'json',
 			success: function(roomMessages) {
 				let youOrHe = null;
@@ -46,7 +86,7 @@ $(document).ready(function() {
 			$.ajax({
 				url: `${runtime.api.url}/v1/messages/${runtime.room.id}/${runtime.lastId}/20`,
 				contentType: 'application/json; charset=UTF-8',
-				type: 'GET',
+				method: 'GET',
 				dataType: 'json',
 				beforeSend: function() {
 					runtime.getingNewMessage = true;
@@ -83,8 +123,7 @@ $(document).ready(function() {
 	function userRegister() {
 		$.ajax({
 			url: `${runtime.api.url}/v1/users`,
-			contentType: 'application/json; charset=UTF-8',
-			type: 'POST',
+			method: 'POST',
 			dataType: 'json',
 			success: function(response) {
 				if (setUserCredentials(response)) {
@@ -106,7 +145,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: `${runtime.api.url}/v1/users/${JSON.parse($.cookie('user')).token}`,
 			contentType: 'application/json; charset=UTF-8',
-			type: 'GET',
+			method: 'GET',
 			dataType: 'json',
 			success: function(response) {
 				if (setUserCredentials(response)) {
