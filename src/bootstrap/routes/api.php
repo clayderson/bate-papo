@@ -1,21 +1,23 @@
 <?php
 
+	use \app\controllers\api;
+
 	$app->group('/api/v1', function() {
-		$this->group('/room', function() {
-			$this->post('', \app\controllers\api\v1\roomController::class . ':save');
-			$this->get('/{code}', \app\controllers\api\v1\roomController::class . ':find');
-			$this->put('/{code}', \app\controllers\api\v1\roomController::class . ':update');
+		$this->group('/rooms', function() {
+			$this->post('', api\v1\roomsController::class . ':save');
+			$this->get('/{code}', api\v1\roomsController::class . ':find');
+			$this->put('/{code}', api\v1\roomsController::class . ':update');
 		});
 
-		$this->group('/user', function() {
-			$this->post('', \app\controllers\api\v1\userController::class . ':save');
-			$this->get('/{token}', \app\controllers\api\v1\userController::class . ':find');
-			$this->put('/{token}', \app\controllers\api\v1\userController::class . ':update');
+		$this->group('/users', function() {
+			$this->post('', api\v1\usersController::class . ':save');
+			$this->get('/{token}', api\v1\usersController::class . ':find');
+			$this->put('/{token}', api\v1\usersController::class . ':update');
 		});
 
-		$this->group('/message', function() {
-			$this->post('', \app\controllers\api\v1\messageController::class . ':save');
-			$this->get('/{roomId}', \app\controllers\api\v1\messageController::class . ':find');
-			$this->get('/{roomId}/{limit}/{offset}', \app\controllers\api\v1\messageController::class . ':findAtLimitAndOffset');
+		$this->group('/messages', function() {
+			$this->post('', api\v1\messagesController::class . ':save');
+			$this->get('/{roomId}', api\v1\messagesController::class . ':find');
+			$this->get('/{roomId}/{limit}/{offset}', api\v1\messagesController::class . ':findAtLimitAndOffset');
 		});
 	});

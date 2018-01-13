@@ -1,11 +1,12 @@
 <?php
 
 	namespace app\controllers\api\v1;
-	use \app\models\messageModel;
-	use \app\models\roomModel;
-	use \app\models\userModel;
 
-	class messageController extends \app\controllers\controller
+	use \app\models\messagesTable;
+	use \app\models\roomsTable;
+	use \app\models\usersTable;
+
+	class messagesController extends \app\controllers\api\v1\controller
 	{
 		public function find($request, $response, $args)
 		{
@@ -17,8 +18,7 @@
 				], 400);
 			}
 
-			$minutesAgo = 15;
-			$data = messageModel::findAllByRoomIdAndMinutesAgo($roomId, $minutesAgo)[0] ?? null;
+			$data = messagesTable::findAllByRoomIdAndMinutesAgo($roomId, 15)[0] ?? null;
 
 			if (!empty($data)) {
 				return $response->withJson([
@@ -56,8 +56,7 @@
 				], 400);
 			}
 
-			$minutesAgo = 15;
-			$data = messageModel::findAllByRoomIdAndMinutesAgoAndLimitAndOffset($roomId, $minutesAgo, $limit, $offset)[0] ?? null;
+			$data = messagesTable::findAllByRoomIdAndMinutesAgoAndLimitAndOffset($roomId, 15, $limit, $offset)[0] ?? null;
 
 			if (!empty($data)) {
 				return $response->withJson([
@@ -97,13 +96,13 @@
 				], 400);
 			}
 
-			$roomData = roomModel::findById($roomId)[0] ?? null;
+			$roomData = roomsTable::findById($roomId)[0] ?? null;
 
 			if (!empty($roomData)) {
-				$userData = userModel::findByToken($userToken)[0] ?? null;
+				$userData = usersTable::findByToken($userToken)[0] ?? null;
 				if (!empty($userData)) {
 					return $response->withJson([
-						'id' => messageModel::save($roomId, $userData['id'], $message, $ip, $userAgent),
+						'id' => messagesTable::save($roomId, $userData['id'], $message, $ip, $userAgent),
 						'roomId' => $roomId,
 						'userId' => $userData['id'],
 						'message' => htmlspecialchars($message)
@@ -120,4 +119,3 @@
 			], 400);
 		}
 	}
-

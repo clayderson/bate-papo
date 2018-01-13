@@ -1,30 +1,23 @@
 <?php
 
 	namespace app\controllers\api\v1;
-	use \app\models\roomModel;
 
-	class roomController extends \app\controllers\controller
+	use \utility;
+	use \app\models\roomsTable;
+
+	class roomsController extends \app\controllers\api\v1\controller
 	{
-		private function checkCode($code)
-		{
-			if (preg_match('/^[A-Za-z0-9-]{10}$/', $code)) {
-				return true;
-			}
-
-			return false;
-		}
-
 		public function find($request, $response, $args)
 		{
 			$code = $args['code'] ?? '';
 
-			if (!$this->checkCode($args['code'])) {
+			if (!utility::checkChatCode($code)) {
 				return $response->withJson([
 					'errorMessage' => 'invalid code'
 				], 400);
 			}
 
-			$data = roomModel::findByCode($code)[0] ?? null;
+			$data = roomsTable::findByCode($code)[0] ?? null;
 
 			if (!empty($data)) {
 				return $response->withJson([
@@ -50,18 +43,18 @@
 			$roomCode = false;
 
 			while (!$roomCode) {
-				$roomCode = bin2hex(random_bytes(5));
-				if (!$this->checkCode($roomCode)) {
+				$roomCode = utility::getRandomChatCode();
+				if (!utility::checkChatCode($roomCode)) {
 					$roomCode = false;
 				} else {
-					if (!empty(roomModel::findByCode($roomCode))) {
+					if (!empty(roomsTable::findByCode($roomCode))) {
 						$roomCode = false;
 					}
 				}
 			}
 
 			return $response->withJson([
-				'id' => roomModel::save($roomCode, $title),
+				'id' => roomsTable::save($roomCode, $title),
 				'code' => $roomCode,
 				'title' => htmlspecialchars($title)
 			], 201);
@@ -71,13 +64,13 @@
 		{
 			$code = $args['code'] ?? '';
 
-			if (!$this->checkCode($code)) {
+			if (!utility::checkChatCode($code)) {
 				return $response->withJson([
 					'errorMessage' => 'invalid code'
 				], 400);
 			}
 
-			$data = roomModel::findByCode($code)[0] ?? null;
+			$data = roomsTable::findByCode($code)[0] ?? null;
 
 			if (!empty($data)) {
 				$title = $request->getParsedBody()['title'] ?? $data['title'];
@@ -89,7 +82,7 @@
 				}
 
 				return $response->withJson([
-					'affectedRows' => roomModel::updateById($data['id'], $title)
+					'affectedRows' => roomsTable::updateById($data['id'], $title)
 				], 201);
 			}
 
@@ -98,4 +91,3 @@
 			], 200);
 		}
 	}
-

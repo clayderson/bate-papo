@@ -1,4 +1,6 @@
 <?php
 
-	$app->get('/', \app\controllers\website\homeController::class)->setName('home');
-	$app->get('/chat/{roomCode}', \app\controllers\website\chatController::class)->setName('chat');
+use \app\controllers\website;
+
+	$app->get('/', website\indexController::class)->setName('index');
+	$app->get('/chats/{roomCode}', website\chatsController::class)->setName('chats');

@@ -1,13 +1,12 @@
 <?php
 
 	namespace app\models;
-	use \db;
 
-	class roomModel extends \app\models\model
+	class roomsTable extends \app\models\model
 	{
 		public static function findAll()
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `room`'
 			);
 
@@ -22,7 +21,7 @@
 
 		public static function findById($id)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `room` WHERE `id` = :id LIMIT 1'
 			);
 
@@ -38,7 +37,7 @@
 
 		public static function findByCode($code)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `room` WHERE `code` = :code LIMIT 1'
 			);
 
@@ -54,7 +53,7 @@
 
 		public static function save($code, $title)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'INSERT INTO `room` (`code`, `title`)
 				VALUES (:code, :title)'
 			);
@@ -64,7 +63,7 @@
 			$stmt->execute();
 
 			if ($stmt->rowCount()) {
-				return db::instance()->lastInsertId();
+				return self::db()->lastInsertId();
 			}
 
 			return false;
@@ -72,7 +71,7 @@
 
 		public static function del($id)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'DELETE FROM `room` WHERE `id` = :id LIMIT 1'
 			);
 
@@ -84,7 +83,7 @@
 
 		public static function updateById($id, $title)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'UPDATE `room` SET `title` = :title WHERE `id` = :id LIMIT 1'
 			);
 

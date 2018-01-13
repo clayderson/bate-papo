@@ -1,23 +1,12 @@
 <?php
 
 	namespace app\controllers\api\v1;
-	use \app\models\userModel;
 
-	class userController extends \app\controllers\controller
+	use \utility;
+	use \app\models\usersTable;
+
+	class usersController extends \app\controllers\api\v1\controller
 	{
-		private function getRandomNickname()
-		{
-			$cuteAnimals = [
-				'Feneco', 'Társio-das-Filipinas', 'Panda', 'Foca da Groelândia',
-				'Lontra-marinha', 'Colibri-abelha-cubano', 'Alpaca', 'Golfinho',
-				'Corça', 'Chinchila', 'Peixe-palhaço', 'Baleia-branca',
-				'Panda-vermelho', 'Pinguim', 'Coala', 'Suricate', 'Camaleão',
-				'Lóris-lento-pigmeu', 'Hipopótamo-pigmeu', 'Bicho-preguiça'
-			];
-
-			return $cuteAnimals[array_rand($cuteAnimals)];
-		}
-
 		public function find($request, $response, $args)
 		{
 			$token = $args['token'] ?? '';
@@ -28,7 +17,7 @@
 				], 400);
 			}
 
-			$data = userModel::findByToken($token)[0] ?? null;
+			$data = usersTable::findByToken($token)[0] ?? null;
 
 			if (!empty($data)) {
 				return $response->withJson([
@@ -44,7 +33,7 @@
 
 		public function save($request, $response, $args)
 		{
-			$nickname = $request->getParsedBody()['nickname'] ?? $this->getRandomNickname();
+			$nickname = $request->getParsedBody()['nickname'] ?? utility::getRandomNickname(25);
 			$color = $request->getParsedBody()['color'] ?? 'a588be';
 
 			if (strlen($nickname) < 3 || strlen($nickname) > 25) {
@@ -63,13 +52,13 @@
 
 			while (!$userToken) {
 				$userToken = md5(bin2hex(random_bytes(10)));
-				if (!empty(userModel::findByToken($userToken))) {
+				if (!empty(usersTable::findByToken($userToken))) {
 					$userToken = false;
 				}
 			}
 
 			return $response->withJson([
-				'id' => userModel::save($nickname, $color, $userToken),
+				'id' => usersTable::save($nickname, $color, $userToken),
 				'nickname' => htmlspecialchars($nickname),
 				'color' => htmlspecialchars($color),
 				'token' => $userToken
@@ -86,7 +75,7 @@
 				], 400);
 			}
 
-			$data = userModel::findByToken($token)[0] ?? null;
+			$data = usersTable::findByToken($token)[0] ?? null;
 
 			if (!empty($data)) {
 				$nickname = $request->getParsedBody()['nickname'] ?? $data['nickname'];
@@ -105,7 +94,7 @@
 				}
 
 				return $response->withJson([
-					'affectedRows' => userModel::updateById($data['id'], $nickname, $color)
+					'affectedRows' => usersTable::updateById($data['id'], $nickname, $color)
 				], 201);
 			}
 
@@ -114,4 +103,3 @@
 			], 200);
 		}
 	}
-

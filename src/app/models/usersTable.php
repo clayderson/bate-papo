@@ -1,13 +1,12 @@
 <?php
 
 	namespace app\models;
-	use \db;
 
-	class userModel extends \app\models\model
+	class usersTable extends \app\models\model
 	{
 		public static function findAll()
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `user`'
 			);
 
@@ -22,7 +21,7 @@
 
 		public static function findById($id)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `user` WHERE `id` = :id LIMIT 1'
 			);
 
@@ -38,7 +37,7 @@
 
 		public static function findByToken($token)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `user` WHERE `token` = :token LIMIT 1'
 			);
 
@@ -54,7 +53,7 @@
 
 		public static function save($nickname, $color, $token)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'INSERT INTO `user` (`nickname`, `color`, `token`)
 				VALUES (:nickname, :color, :token)'
 			);
@@ -65,7 +64,7 @@
 			$stmt->execute();
 
 			if ($stmt->rowCount()) {
-				return db::instance()->lastInsertId();
+				return self::db()->lastInsertId();
 			}
 
 			return false;
@@ -73,7 +72,7 @@
 
 		public static function del($id)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'DELETE FROM `user` WHERE `id` = :id LIMIT 1'
 			);
 
@@ -85,7 +84,7 @@
 
 		public static function updateById($id, $nickname, $color)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'UPDATE `user` SET `nickname` = :nickname, `color` = :color WHERE `id` = :id LIMIT 1'
 			);
 

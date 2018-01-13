@@ -1,13 +1,12 @@
 <?php
 
 	namespace app\models;
-	use \db;
 
-	class messageModel extends \app\models\model
+	class messagesTable extends \app\models\model
 	{
 		public static function findAll()
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `message`'
 			);
 
@@ -22,7 +21,7 @@
 
 		public static function findAllByRoomId($roomId)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `message` WHERE `roomId` = :roomId'
 			);
 
@@ -38,7 +37,7 @@
 
 		public static function findAllByRoomIdAndMinutesAgo($roomId, $minutesAgo)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `message` WHERE `roomId` = :roomId AND `createdAt` >= :createdAt'
 			);
 
@@ -55,7 +54,7 @@
 
 		public static function findAllByRoomIdAndMinutesAgoAndLimitAndOffset($roomId, $minutesAgo, $limit, $offset)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `message` WHERE `roomId` = :roomId AND `createdAt` >= :createdAt LIMIT :limit OFFSET :offset'
 			);
 
@@ -74,7 +73,7 @@
 
 		public static function findAllByUserId($userId)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `message` WHERE `userId` = :userId'
 			);
 
@@ -90,7 +89,7 @@
 
 		public static function findAllByIp($ip)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `message` WHERE `ip` = :ip'
 			);
 
@@ -106,7 +105,7 @@
 
 		public static function findById($id)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'SELECT * FROM `message` WHERE `id` = :id LIMIT 1'
 			);
 
@@ -122,7 +121,7 @@
 
 		public static function save($roomId, $userId, $message, $ip, $userAgent)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'INSERT INTO `message` (`roomId`, `userId`, `message`, `ip`, `userAgent`)
 				VALUES (:roomId, :userId, :message, :ip, :userAgent)'
 			);
@@ -135,7 +134,7 @@
 			$stmt->execute();
 
 			if ($stmt->rowCount()) {
-				return db::instance()->lastInsertId();
+				return self::db()->lastInsertId();
 			}
 
 			return false;
@@ -143,7 +142,7 @@
 
 		public static function del($id)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'DELETE FROM `message` WHERE `id` = :id LIMIT 1'
 			);
 
@@ -155,7 +154,7 @@
 
 		public static function updateById($id, $message)
 		{
-			$stmt = db::instance()->prepare(
+			$stmt = self::db()->prepare(
 				'UPDATE `message` SET `message` = :message WHERE `id` = :id LIMIT 1'
 			);
 
