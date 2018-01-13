@@ -41,6 +41,7 @@
 			return $this->view->render($response->withStatus(200), '/chat.twig', [
 				'title' => $roomDetails['title'],
 				'roomId' => $roomDetails['id'],
+				'roomUrl' => $request->getUri(),
 				'apiUrl' => __API_URL,
 			]);
 		}

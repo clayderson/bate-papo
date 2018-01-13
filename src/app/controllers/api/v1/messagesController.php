@@ -22,8 +22,13 @@
 
 			if (!empty($data)) {
 				foreach ($data as $message) {
-					$messages[$message['id']] = $message;
+					$id = $message['id'];
+					$messages[$id] = $message;
+					$messages[$id]['message'] = htmlspecialchars(strip_tags($message['message']));
+					$messages[$id]['createdAt'] = strftime('Enviada em %d de %b às %H:%M', $message['createdAt']);
 					unset($messages[$message['id']]['id']);
+					unset($messages[$message['id']]['ip']);
+					unset($messages[$message['id']]['userAgent']);
 				}
 
 				return $response->withJson($messages, 200);
@@ -32,11 +37,11 @@
 			return $response->withJson([], 200);
 		}
 
-		public function findAtLimitAndOffset($request, $response, $args)
+		public function findAtLimitAndMinId($request, $response, $args)
 		{
 			$roomId = (int) $args['roomId'] ?? '';
 			$limit = (int) $args['limit'] ?? 20;
-			$offset = (int) $args['offset'] ?? 0;
+			$minId = (int) $args['minId'] ?? 0;
 
 			if ($roomId < 1) {
 				return $response->withJson([
@@ -50,18 +55,23 @@
 				], 400);
 			}
 
-			if ($offset < 0) {
+			if ($minId < 0) {
 				return $response->withJson([
-					'errorMessage' => 'invalid offset'
+					'errorMessage' => 'invalid minId'
 				], 400);
 			}
 
-			$data = messagesTable::findAllByRoomIdAndMinutesAgoAndLimitAndOffset($roomId, 15, $limit, $offset) ?? null;
+			$data = messagesTable::findAllByRoomIdAndMinutesAgoAndLimitAndMinId($roomId, $minId, $limit, 15) ?? null;
 
 			if (!empty($data)) {
 				foreach ($data as $message) {
-					$messages[$message['id']] = $message;
+					$id = $message['id'];
+					$messages[$id] = $message;
+					$messages[$id]['message'] = htmlspecialchars(strip_tags($message['message']));
+					$messages[$id]['createdAt'] = strftime('Enviada em %d de %b às %H:%M', $message['createdAt']);
 					unset($messages[$message['id']]['id']);
+					unset($messages[$message['id']]['ip']);
+					unset($messages[$message['id']]['userAgent']);
 				}
 
 				return $response->withJson($messages, 200);
@@ -105,7 +115,7 @@
 						'id' => messagesTable::save($roomId, $userData['id'], $message, $ip, $userAgent),
 						'roomId' => $roomId,
 						'userId' => $userData['id'],
-						'message' => htmlspecialchars($message)
+						'message' => htmlspecialchars(strip_tags($message))
 					], 201);
 				}
 

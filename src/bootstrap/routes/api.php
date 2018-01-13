@@ -18,6 +18,6 @@
 		$this->group('/messages', function() {
 			$this->post('', api\v1\messagesController::class . ':save');
 			$this->get('/{roomId}', api\v1\messagesController::class . ':find');
-			$this->get('/{roomId}/{limit}/{offset}', api\v1\messagesController::class . ':findAtLimitAndOffset');
+			$this->get('/{roomId}/{minId}/{limit}', api\v1\messagesController::class . ':findAtLimitAndMinId');
 		});
 	});

@@ -23,7 +23,7 @@
 				return $response->withJson([
 					'id' => $data['id'],
 					'code' => $data['code'],
-					'title' => htmlspecialchars($data['title'])
+					'title' => htmlspecialchars(strip_tags($data['title']))
 				], 200);
 			}
 
@@ -56,7 +56,7 @@
 			return $response->withJson([
 				'id' => roomsTable::save($roomCode, $title),
 				'code' => $roomCode,
-				'title' => htmlspecialchars($title)
+				'title' => htmlspecialchars(strip_tags($title))
 			], 201);
 		}
 

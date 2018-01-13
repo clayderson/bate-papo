@@ -2,6 +2,8 @@
 
 	namespace app\models;
 
+	use \PDO;
+
 	class messagesTable extends \app\models\model
 	{
 		public static function findAll()
@@ -52,16 +54,16 @@
 			return false;
 		}
 
-		public static function findAllByRoomIdAndMinutesAgoAndLimitAndOffset($roomId, $minutesAgo, $limit, $offset)
+		public static function findAllByRoomIdAndMinutesAgoAndLimitAndMinId($roomId, $minId, $limit, $minutesAgo)
 		{
 			$stmt = self::db()->prepare(
-				'SELECT * FROM `message` WHERE `roomId` = :roomId AND `createdAt` >= :createdAt LIMIT :limit OFFSET :offset'
+				'SELECT * FROM `message` WHERE `id` > :minId AND `roomId` = :roomId AND `createdAt` >= :createdAt LIMIT :limit'
 			);
 
+			$stmt->bindValue(':minId', $minId);
 			$stmt->bindValue(':roomId', $roomId);
 			$stmt->bindValue(':createdAt', (time() - (60 * $minutesAgo)));
-			$stmt->bindValue(':limit', $limit);
-			$stmt->bindValue(':offset', $offset);
+			$stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
 			$stmt->execute();
 
 			if ($stmt->rowCount()) {
