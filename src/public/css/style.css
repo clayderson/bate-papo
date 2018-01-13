@@ -19,6 +19,19 @@ body {
 	font-size: 3rem;
 }
 
+.alert-container {
+	display: none;
+	padding: 1.5rem 1.6rem .5rem 1.6rem;
+	background-color: #fed859;
+	color: #696969;
+}
+
+.alert-container .title {
+	margin-bottom: .4rem;
+	font-size: 1.3rem;
+	font-weight: bolder;
+}
+
 .viewport-container {
 	position: relative;
 	padding: 1rem 1.6rem;
@@ -28,7 +41,13 @@ body {
 	overflow: auto;
 }
 
+.viewport-container .messages-loading {
+	position: relative;
+	top: 120px;
+}
+
 .viewport-container .messages {
+	display: none;
 	position: absolute;
 	bottom: 10px;
 	padding-top: 1.8rem;
@@ -36,11 +55,13 @@ body {
 	max-height: 330px;
 }
 
-.viewport-container .messages .he, .viewport-container .messages .you {
+.viewport-container .messages .he,
+.viewport-container .messages .you {
 	margin: -.2rem 0;
 }
 
-.viewport-container .messages .he p, .viewport-container .messages .you p {
+.viewport-container .messages .he p,
+.viewport-container .messages .you p {
 	padding: .5rem 1rem;
 	display: inline-block;
 	background-color: #a588be;
@@ -63,13 +84,20 @@ body {
 	background-color: #e8dcf3;
 }
 
-.input-container input, .input-container input:active, .input-container input:focus {
+.input-container input,
+.input-container input:active,
+.input-container input:focus,
+.input-container input[disabled] {
 	padding: .8rem .2rem;
 	background-color: #e8dcf3;
 	border: none;
 	box-shadow: none;
 	outline: none;
 	font-weight: lighter;
+}
+
+.input-container input[disabled] {
+	cursor: not-allowed;
 }
 
 .input-container .btn-submit {
@@ -85,7 +113,16 @@ body {
 	color: #fbfbfb;
 }
 
-footer, footer a, footer a:hover, footer a:active, footer a:focus {
+.input-container .btn-submit:active,
+.input-container .btn-submit:focus {
+	box-shadow: none;
+}
+
+footer,
+footer a,
+footer a:hover,
+footer a:active,
+footer a:focus {
 	margin-top: 3rem;
 	color: #e8dcf3;
 	text-decoration: none;
