@@ -6,6 +6,7 @@
 	use \app\models\roomsTable;
 	use \app\models\messagesTable;
 	use \app\models\usersTable;
+	use \app\models\viewMessagesUsersTable;
 
 	class controller
 	{
@@ -18,6 +19,7 @@
 			roomsTable::setInstance(db::instance());
 			messagesTable::setInstance(db::instance());
 			usersTable::setInstance(db::instance());
+			viewMessagesUsersTable::setInstance(db::instance());
 		}
 
 		public function __get($property)

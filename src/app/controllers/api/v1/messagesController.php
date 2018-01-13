@@ -5,6 +5,7 @@
 	use \app\models\messagesTable;
 	use \app\models\roomsTable;
 	use \app\models\usersTable;
+	use \app\models\viewMessagesUsersTable;
 
 	class messagesController extends \app\controllers\api\v1\controller
 	{
@@ -18,7 +19,7 @@
 				], 400);
 			}
 
-			$data = messagesTable::findAllByRoomIdAndMinutesAgo($roomId, 15) ?? null;
+			$data = viewMessagesUsersTable::findAllByRoomIdAndMinutesAgo($roomId, 15) ?? null;
 
 			if (!empty($data)) {
 				foreach ($data as $message) {
@@ -61,7 +62,7 @@
 				], 400);
 			}
 
-			$data = messagesTable::findAllByRoomIdAndMinutesAgoAndLimitAndMinId($roomId, $minId, $limit, 15) ?? null;
+			$data = viewMessagesUsersTable::findAllByRoomIdAndMinutesAgoAndLimitAndMinId($roomId, $minId, $limit, 15) ?? null;
 
 			if (!empty($data)) {
 				foreach ($data as $message) {
