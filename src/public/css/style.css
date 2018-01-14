@@ -1,5 +1,6 @@
 * {
 	font-family: 'Assistant', sans-serif;
+	font-weight: 400;
 }
 
 strong {
@@ -74,7 +75,6 @@ body {
 	background-color: #a588be;
 	color: #fbfbfb;
 	border-radius: 3px;
-	font-weight: lighter;
 	font-size: 1rem;
 	min-width: 180px;
 }
