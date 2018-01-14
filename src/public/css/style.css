@@ -68,13 +68,15 @@ body {
 .viewport-container .messages-container .he p,
 .viewport-container .messages-container .you p,
 .viewport-container .messages-container .system p {
-	padding: .5rem 1rem;
+	position: relative;
+	padding: 1.5rem 1rem .5rem 1rem;
 	display: inline-block;
 	background-color: #a588be;
 	color: #fbfbfb;
 	border-radius: 3px;
 	font-weight: lighter;
 	font-size: 1rem;
+	min-width: 180px;
 }
 
 .viewport-container .messages-container .system p {
@@ -82,6 +84,23 @@ body {
 	background-color: #fed859;
 	color: #696969;
 	font-size: .9rem;
+}
+
+.viewport-container .messages-container .he p .nickname,
+.viewport-container .messages-container .you p .nickname {
+	position: absolute;
+	top: 6px;
+	font-size: .8rem;
+	font-weight: 600;
+	color: #e8dcf3;
+}
+
+.viewport-container .messages-container .he p .nickname {
+	left: 16px;
+}
+
+.viewport-container .messages-container .you p .nickname {
+	right: 16px;
 }
 
 .viewport-container .messages-container .he {

@@ -57,7 +57,7 @@ $(document).ready(function() {
 				for(let id in roomMessages) {
 					runtime.lastId = id;
 					youOrHe = roomMessages[id]['userId'] === runtime.user.id ? 'you' : 'he';
-					messagesContainer.append(`<div class="${youOrHe}"><p title="${roomMessages[id]['createdAt']}">${roomMessages[id]['message']}</p></div>`);
+					messagesContainer.append(`<div class="${youOrHe}"><p title="${roomMessages[id]['createdAt']}"><span class="nickname">${roomMessages[id]['userNickname']}</span>${roomMessages[id]['message']}</p></div>`);
 				}
 
 				messagesContainer.append(`<div class="system"><p>Este chat é um projeto experimental. Você <strong>não</strong> deve compartilhar dados sensíveis aqui. O chat é visível para qualquer pessoa que possuir o link e novos visitantes só poderão ver mensagens enviadas nos últimos 15 minutos.</p></div>`);
@@ -104,7 +104,7 @@ $(document).ready(function() {
 					for(let id in roomMessages) {
 						runtime.lastId = id;
 						youOrHe = roomMessages[id]['userId'] === runtime.user.id ? 'you' : 'he';
-						messagesContainer.append(`<div class="${youOrHe}"><p title="${roomMessages[id]['createdAt']}">${roomMessages[id]['message']}</p></div>`);
+						messagesContainer.append(`<div class="${youOrHe}"><p title="${roomMessages[id]['createdAt']}"><span class="nickname">${roomMessages[id]['userNickname']}</span>${roomMessages[id]['message']}</p></div>`);
 					}
 
 					if (forceScroll) {
