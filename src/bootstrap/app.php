@@ -26,6 +26,8 @@
 			'allowMethods' => ['GET', 'POST', 'PUT']
 		]));
 
+		$app->add(new RKA\Middleware\IpAddress(true));
+
 		if (__MYSQL_HOST) {
 			db::credentials(
 				__MYSQL_HOST,

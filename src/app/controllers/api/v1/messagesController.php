@@ -86,8 +86,8 @@
 			$roomId = $request->getParsedBody()['roomId'] ?? '';
 			$userToken = $request->getParsedBody()['userToken'] ?? '';
 			$message = $request->getParsedBody()['message'] ?? '';
-			$ip = null;
-			$userAgent = null;
+			$ip = $request->getAttribute('ip_address');
+			$userAgent = $request->getServerParam('HTTP_USER_AGENT', null);
 
 			if ($roomId < 1) {
 				return $response->withJson([

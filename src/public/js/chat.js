@@ -61,7 +61,7 @@ $(document).ready(function() {
 				}
 
 				messagesContainer.append(`<div class="system"><p>Este chat é um projeto experimental. Você <strong>não</strong> deve compartilhar dados sensíveis aqui. O chat é visível para qualquer pessoa que possuir o link e novos visitantes só poderão ver mensagens enviadas nos últimos 15 minutos.</p></div>`);
-				messagesContainer.append(`<div class="system"><p>Convide seus amigos para o bate papo enviando esse link para eles &#187; <a href="${runtime.room.url}">${runtime.room.url}</a></p></div>`);
+				messagesContainer.append(`<div class="system"><p>Convide seus amigos para o bate papo enviando esse link para eles &#187; <a href="${runtime.room.url}">${runtime.room.url}</a> ou inicie um novo chat clicando <a href="/" target="_blank" title="Abrir um novo chat em uma aba separada">aqui</a>.</p></div>`);
 
 				messagesContainer.show();
 				messagesLoading.hide();
