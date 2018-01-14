@@ -80,6 +80,7 @@ body {
 }
 
 .viewport-container .messages-container .system p {
+	padding: .5rem 1rem .5rem 1rem;
 	display: block;
 	background-color: #fed859;
 	color: #696969;
